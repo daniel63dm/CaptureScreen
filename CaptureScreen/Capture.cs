@@ -15,6 +15,7 @@ namespace CaptureScreen
         public Capture()
         {
             InitializeComponent();
+            rbFile.Checked = true;
         }
 
         private void mouse_Click(object sender, MouseEventArgs e)
@@ -32,7 +33,11 @@ namespace CaptureScreen
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            ScreenShot.CaptureScreen(ScreenRectangle.Draw(this));
+            this.Hide();
+            ScreenShot.Prefix = $"{txtParam.Text} ";
+            ScreenShot.CaptureScreen(ScreenRectangle.Draw(this),rbClipboard.Checked?OutputTarget.Clipboard:OutputTarget.File);
+            txtLog.Text += ScreenShot.FileName;
+            this.Show();
         }
     }
 }
