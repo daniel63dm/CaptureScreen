@@ -10,14 +10,14 @@ namespace CaptureScreen
 {
     class ScreenShot
     {
-        public static bool CaptureScreen(Point UpLeftSource, Rectangle selection)
+        public static bool CaptureScreen(Rectangle selection)
         {
             Point UpLeftDestination = new Point(0, 0);
             using (Bitmap bmap = new Bitmap(selection.Width, selection.Height))
             {
                 using (Graphics g = Graphics.FromImage(bmap))
                 {
-                    g.CopyFromScreen(UpLeftSource,UpLeftDestination,selection.Size);
+                    g.CopyFromScreen(selection.Location, UpLeftDestination,selection.Size);
                     Clipboard.SetImage(bmap);
                 }
             }

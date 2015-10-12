@@ -32,7 +32,7 @@ namespace CaptureScreen
 
         private void btnCapture_Click(object sender, EventArgs e)
         {
-            txtLog.Text = ScreenRectangle.Draw(this).ToString();
+            ScreenShot.CaptureScreen(ScreenRectangle.Draw(this));
         }
     }
 }

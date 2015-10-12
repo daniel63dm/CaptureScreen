@@ -7,7 +7,10 @@ namespace CaptureScreen
     class ScreenRectangle
     { 
         private static Form layer;
-        private static Point PosO;
+        /// <summary>
+        /// Upper left point of the rectangle
+        /// </summary>
+        private static Point posO;
         private static Rectangle rectangle;
         private static Rectangle bordure;
         private static int epaisseurTrait = 5;
@@ -15,20 +18,17 @@ namespace CaptureScreen
         private static bool Selecting = false;
         private static Pen penBack = new Pen(Color.White);
 
+        /// <summary>
+        /// Draw a rectangle on the screen
+        /// </summary>
+        /// <param name="parent">parent form</param>
+        /// <returns>the drawn rectangle</returns>
         public static Rectangle Draw(Form parent)
         {
             // TODO : change it to real form for doubleBuffer
             // Create a transparent form on top of <frm>
-            layer = new Form();
-            layer.FormBorderStyle = FormBorderStyle.None;
-            layer.BackColor = Color.Gray;
-            layer.TransparencyKey = Color.White;
-            layer.ShowInTaskbar = false;
-            layer.StartPosition = FormStartPosition.Manual;
-            layer.Size = parent.ClientSize;
-            layer.Location = Point.Empty;
-            layer.WindowState = FormWindowState.Maximized;
-            layer.Opacity = 0.3D;           
+            layer = new Layer();
+    
             layer.MouseMove += MouseMove;
             layer.MouseDown += MouseDown;
             layer.MouseUp += MouseUp;
@@ -42,13 +42,13 @@ namespace CaptureScreen
             layer = null;
             Point pos = Control.MousePosition;
             Selecting = false;
-            Size size = new Size(Math.Abs(PosO.X - pos.X), Math.Abs(PosO.Y - pos.Y));
-            return new Rectangle(PosO,size);
+            Size size = new Size(Math.Abs(posO.X - pos.X), Math.Abs(posO.Y - pos.Y));
+            return new Rectangle(posO,size);
         }
 
         private static void MouseDown(object sender, MouseEventArgs e)
         {
-                PosO = Control.MousePosition;
+                posO = Control.MousePosition;
                 Selecting = true;
         }
 
@@ -65,15 +65,17 @@ namespace CaptureScreen
         }
         private static void MouseUp(object sender, MouseEventArgs e)
         {
-            // Done, close mask
+            // Done
             Selecting = false;
             layer.Close();
         }
+        /// <summary>
+        /// Draw the rectangle
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private static void PaintRectangle(object sender, PaintEventArgs e)
         {
-            // Draw
-            // TODO : Couleur de fond plus blanche/gris très clair
-            // TODO : Eclaircir la zone de selection
             Brush brush = new SolidBrush(Color.Red);
 
             if (Selecting)
@@ -81,16 +83,33 @@ namespace CaptureScreen
                 Point pos = Control.MousePosition;
                 using (Pen pen = new Pen(brush,epaisseurTrait))
                 {
-                    rectangle.Location = PosO;
-                    bordure.Location = PosO;
-                    rectangle.Width = Math.Abs(PosO.X - pos.X);
-                    rectangle.Height = Math.Abs(PosO.Y - pos.Y);
+                    rectangle.Location = posO;
+                    bordure.Location = posO;
+                    rectangle.Width = Math.Abs(posO.X - pos.X);
+                    rectangle.Height = Math.Abs(posO.Y - pos.Y);
                     bordure.Width = rectangle.Width;
                     bordure.Height = rectangle.Height;
                     e.Graphics.DrawRectangle(pen, rectangle);
                     e.Graphics.FillRectangle(penBack.Brush, rectangle);
                 } 
             }
+        }
+    }
+
+    class Layer : Form
+    {
+        public Layer()
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.BackColor = Color.Gray;
+            this.TransparencyKey = Color.White;
+            this.ShowInTaskbar = false;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Size = new Size();
+            this.Location = Point.Empty;
+            this.WindowState = FormWindowState.Maximized;
+            this.Opacity = 0.3D;
+            this.DoubleBuffered = true;
         }
     }
 }
