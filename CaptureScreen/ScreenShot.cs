@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Configuration;
+ 
 namespace CaptureScreen
 {
     enum OutputTarget
@@ -34,7 +31,8 @@ namespace CaptureScreen
                             break;
                         case OutputTarget.File:
                             SaveFileDialog diag = new SaveFileDialog();
-                            diag.InitialDirectory = @"E:\999_t";
+                            // TODO : Change default directory
+                            diag.InitialDirectory = diag.InitialDirectory == ""?GetPath(): diag.InitialDirectory;
                             diag.Filter = "Png Image (.png)|*.png|Bitmap Image (.bmp)|*.bmp|JPEG Image (.jepg)|*.jepg";
                             diag.DefaultExt = "*.png";
                             diag.FileName = Prefix + DateTime.Now.ToString("yyyyMMddhhmmss");
@@ -55,7 +53,10 @@ namespace CaptureScreen
             }
             return true;
         }
-
+        private static String GetPath()
+        {
+            return ConfigurationManager.AppSettings["DefaultDirectory"];
+        }
         /// <summary>
         /// Convert string to ImageFormat
         /// </summary>

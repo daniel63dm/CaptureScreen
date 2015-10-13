@@ -1,0 +1,2 @@
+﻿echo {"files" : ["F1","F2","F3","F4"]} > files.json
+echo {"files" : ["F1","F2","F3","F4"]} > defaultpath files.json

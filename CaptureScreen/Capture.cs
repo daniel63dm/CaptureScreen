@@ -12,6 +12,7 @@ namespace CaptureScreen
 {
     public partial class Capture : Form
     {
+        private List<String> files = new List<string>();
         public Capture()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace CaptureScreen
             ScreenShot.Prefix = $"{txtParam.Text} ";
             ScreenShot.CaptureScreen(ScreenRectangle.Draw(this),rbClipboard.Checked?OutputTarget.Clipboard:OutputTarget.File);
             txtLog.Text += ScreenShot.FileName;
+            files.Add(ScreenShot.FileName);
             this.Show();
         }
     }
