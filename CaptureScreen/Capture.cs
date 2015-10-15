@@ -7,9 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JSonLib;
 
 namespace CaptureScreen
 {
+    // TODO : add command to write list of files to json file. On Close event ?
+    // Build separate tool to fill the image's description
     public partial class Capture : Form
     {
         private List<String> files = new List<string>();
@@ -40,6 +43,12 @@ namespace CaptureScreen
             txtLog.Text += ScreenShot.FileName;
             files.Add(ScreenShot.FileName);
             this.Show();
+        }
+
+        private void btnBuildDoc_Click(object sender, EventArgs e)
+        {
+            JSonBuilder jsonBuilder = new JSonBuilder();
+            string json = jsonBuilder.ListToJSon("files",files);
         }
     }
 }

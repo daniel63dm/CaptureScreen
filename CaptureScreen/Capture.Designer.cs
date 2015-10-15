@@ -31,13 +31,11 @@
             this.btnCapture = new System.Windows.Forms.Button();
             this.txtLog = new System.Windows.Forms.TextBox();
             this.gbTarget = new System.Windows.Forms.GroupBox();
-            this.rbFile = new System.Windows.Forms.RadioButton();
             this.rbClipboard = new System.Windows.Forms.RadioButton();
+            this.rbFile = new System.Windows.Forms.RadioButton();
             this.txtParam = new System.Windows.Forms.TextBox();
-            this.txtComment = new System.Windows.Forms.TextBox();
-            this.gbComment = new System.Windows.Forms.GroupBox();
+            this.btnBuildDoc = new System.Windows.Forms.Button();
             this.gbTarget.SuspendLayout();
-            this.gbComment.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCapture
@@ -53,7 +51,7 @@
             // txtLog
             // 
             this.txtLog.Enabled = false;
-            this.txtLog.Location = new System.Drawing.Point(0, 421);
+            this.txtLog.Location = new System.Drawing.Point(0, 97);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(280, 150);
@@ -70,17 +68,6 @@
             this.gbTarget.TabStop = false;
             this.gbTarget.Text = "Target";
             // 
-            // rbFile
-            // 
-            this.rbFile.AutoSize = true;
-            this.rbFile.Location = new System.Drawing.Point(7, 20);
-            this.rbFile.Name = "rbFile";
-            this.rbFile.Size = new System.Drawing.Size(41, 17);
-            this.rbFile.TabIndex = 0;
-            this.rbFile.TabStop = true;
-            this.rbFile.Text = "File";
-            this.rbFile.UseVisualStyleBackColor = true;
-            // 
             // rbClipboard
             // 
             this.rbClipboard.AutoSize = true;
@@ -92,6 +79,17 @@
             this.rbClipboard.Text = "Clipboard";
             this.rbClipboard.UseVisualStyleBackColor = true;
             // 
+            // rbFile
+            // 
+            this.rbFile.AutoSize = true;
+            this.rbFile.Location = new System.Drawing.Point(7, 20);
+            this.rbFile.Name = "rbFile";
+            this.rbFile.Size = new System.Drawing.Size(41, 17);
+            this.rbFile.TabIndex = 0;
+            this.rbFile.TabStop = true;
+            this.rbFile.Text = "File";
+            this.rbFile.UseVisualStyleBackColor = true;
+            // 
             // txtParam
             // 
             this.txtParam.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -102,40 +100,30 @@
             this.txtParam.TabIndex = 4;
             this.txtParam.Text = "EXPLORE";
             // 
-            // txtComment
+            // btnBuildDoc
             // 
-            this.txtComment.Location = new System.Drawing.Point(1, 19);
-            this.txtComment.Multiline = true;
-            this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(280, 150);
-            this.txtComment.TabIndex = 5;
-            // 
-            // gbComment
-            // 
-            this.gbComment.Controls.Add(this.txtComment);
-            this.gbComment.Location = new System.Drawing.Point(0, 115);
-            this.gbComment.Name = "gbComment";
-            this.gbComment.Size = new System.Drawing.Size(281, 181);
-            this.gbComment.TabIndex = 6;
-            this.gbComment.TabStop = false;
-            this.gbComment.Text = "Comment";
+            this.btnBuildDoc.Location = new System.Drawing.Point(-1, 253);
+            this.btnBuildDoc.Name = "btnBuildDoc";
+            this.btnBuildDoc.Size = new System.Drawing.Size(281, 52);
+            this.btnBuildDoc.TabIndex = 5;
+            this.btnBuildDoc.Text = "Build document";
+            this.btnBuildDoc.UseVisualStyleBackColor = true;
+            this.btnBuildDoc.Click += new System.EventHandler(this.btnBuildDoc_Click);
             // 
             // Capture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 583);
+            this.Controls.Add(this.btnBuildDoc);
             this.Controls.Add(this.txtParam);
             this.Controls.Add(this.gbTarget);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.btnCapture);
-            this.Controls.Add(this.gbComment);
             this.Name = "Capture";
             this.Text = "Capture";
             this.gbTarget.ResumeLayout(false);
             this.gbTarget.PerformLayout();
-            this.gbComment.ResumeLayout(false);
-            this.gbComment.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,8 +137,7 @@
         private System.Windows.Forms.RadioButton rbClipboard;
         private System.Windows.Forms.RadioButton rbFile;
         private System.Windows.Forms.TextBox txtParam;
-        private System.Windows.Forms.TextBox txtComment;
-        private System.Windows.Forms.GroupBox gbComment;
+        private System.Windows.Forms.Button btnBuildDoc;
     }
 }
 
