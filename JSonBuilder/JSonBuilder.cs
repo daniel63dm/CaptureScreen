@@ -26,7 +26,7 @@ namespace JSonLib
             {
                 elements += $",\"{item}\"";
             }
-            return result + "["+ elements.Remove(0,1) + "]}";
+            return ( result + "["+ elements.Remove(0,1) + "]}").Replace(@"\", @"\\");
         }
     }
 }

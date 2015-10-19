@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JSonLib;
+using System.Diagnostics;
+using System.IO;
 
 namespace CaptureScreen
 {
@@ -49,6 +51,16 @@ namespace CaptureScreen
         {
             JSonBuilder jsonBuilder = new JSonBuilder();
             string json = jsonBuilder.ListToJSon("files",files);
+            string filename = Path.GetDirectoryName(ScreenShot.FileName) + @"\files.json";
+            writeJson(json, filename);
+            }
+
+        private async void writeJson(string json, string filename)
+        {
+            using (StreamWriter outputFile = new StreamWriter(filename))
+            {
+                await outputFile.WriteAsync(json);
+            }
         }
     }
 }
